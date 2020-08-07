@@ -1,0 +1,47 @@
+{
+  "name": "js-ts-tools-and-utils.",
+  "version": "1.0.0",
+  "description": "My JS and TS tools I use in my projects and work",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:update-snapshots": "jest -u"
+  },
+  "jest": {
+    "testPathIgnorePatterns": ["<rootDir>/server/"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sv1nnet/JS-TS-tools-and-utils..git"
+  },
+  "keywords": [
+    "JS",
+    "TS",
+    "tools",
+    "utils"
+  ],
+  "author": "Leonid Tsukanov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sv1nnet/JS-TS-tools-and-utils./issues"
+  },
+  "homepage": "https://github.com/Sv1nnet/JS-TS-tools-and-utils.#readme",
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/enzyme": "^3.10.5",
+    "@types/react": "^16.9.44",
+    "@types/react-dom": "^16.9.8",
+    "axios": "^0.19.2",
+    "enzyme": "^3.11.0",
+    "jest": "^26.2.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "babel-jest": "^26.2.2"
+  }
+}

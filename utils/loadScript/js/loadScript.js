@@ -7,9 +7,7 @@
  * @param {Node|Element} [settings.parentNode] - node where script should be appended
  */
 function loadScript(url, settings) {
-  var options = settings.options;
-  var callback = settings.callback;
-  var parentNode = settings.parentNode;
+  const { options, callback, parentNode } = settings;
 
   var script = document.createElement('script')
   script.type = 'text/javascript';

@@ -1,11 +1,12 @@
 
 export type TScriptElementAttributes = {
-  async: boolean;
-  crossOrigin: string | null;
-  defer: boolean;
-  src: string;
-  text: string;
-  type: string;
+  id?: string,
+  className?: string,
+  async?: boolean;
+  crossOrigin?: string | null;
+  defer?: boolean;
+  text?: string;
+  type?: string;
 }
 
 export interface HTMLScriptElementInIE extends HTMLScriptElement {
@@ -14,9 +15,9 @@ export interface HTMLScriptElementInIE extends HTMLScriptElement {
 }
 
 export type TSettings = {
-  options: TScriptElementAttributes;
-  callback: Function;
-  parentNode: HTMLElement;
+  options?: TScriptElementAttributes;
+  callback?: Function;
+  parentNode?: HTMLElement;
 }
 
 
