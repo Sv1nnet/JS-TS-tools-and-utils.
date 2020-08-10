@@ -24,9 +24,6 @@ export class Out {
  * @param  {Element}  elem The element to check
  * @return {Object}     A set of booleans for each side of the element
  */
-function isOutOfViewport(elem: HTMLElement): Out {
-  if (elem && (elem instanceof Node)) return new Out(elem);
-  throw new Error('Passed element in arguments isn\'t an instance of HTMLElement');
-};
+const isOutOfViewport = (elem: HTMLElement): Out => new Out(elem);
 
 export default isOutOfViewport;

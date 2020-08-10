@@ -2,6 +2,7 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+import objectIterator from '../../utils/objectIterator/ts/objectIterator';
 
 export type TMountedHook<H extends {}> = {
   componentMount: ShallowWrapper,
@@ -30,10 +31,13 @@ const mountReactHook = <H extends any>(hook: Function): TMountedHook<H> => {
   act(() => {
     componentMount = shallow(
       <Component>
-        {(hookValues) => {
-          if (typeof hookValues === 'object') Object.assign(componentHook, hookValues);
+        {(hookValues: any) => {
+          const isArray = Array.isArray(hookValues);
+
+          if (typeof hookValues === 'object' || isArray) Object.assign(componentHook, hookValues);
           else componentHook = hookValues;
-          if (Array.isArray(hookValues)) componentHook[Symbol.iterator] = Array.prototype[Symbol.iterator];
+
+          if (isArray) componentHook[Symbol.iterator] = objectIterator;
           return null;
         }}
       </Component>,

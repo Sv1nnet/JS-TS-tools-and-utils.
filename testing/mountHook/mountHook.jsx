@@ -2,6 +2,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+import objectIterator from '../../utils/objectIterator/js/objectIterator';
 
 /**
  * 
@@ -19,15 +20,19 @@ import { act } from 'react-dom/test-utils';
  */
 export const mountReactHook = (hook) => {
   const Component = ({ children }) => children(hook());
-  const componentHook = {};
+  let componentHook = {};
   let componentMount;
 
   act(() => {
     componentMount = shallow(
       <Component>
         {(hookValues) => {
-          Object.assign(componentHook, hookValues);
-          if (Array.isArray(hookValues)) componentHook[Symbol.iterator] = Array.prototype[Symbol.iterator];
+          const isArray = Array.isArray(hookValues);
+
+          if (typeof hookValues === 'object' || isArray) Object.assign(componentHook, hookValues);
+          else componentHook = hookValues;
+
+          if (isArray) componentHook[Symbol.iterator] = objectIterator;
           return null;
         }}
       </Component>,
