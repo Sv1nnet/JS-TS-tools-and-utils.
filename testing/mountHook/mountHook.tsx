@@ -32,12 +32,10 @@ const mountReactHook = <H extends any>(hook: Function): TMountedHook<H> => {
     componentMount = shallow(
       <Component>
         {(hookValues: any) => {
-          const isArray = Array.isArray(hookValues);
-
-          if (typeof hookValues === 'object' || isArray) Object.assign(componentHook, hookValues);
+          if (typeof hookValues === 'object') Object.assign(componentHook, hookValues);
           else componentHook = hookValues;
 
-          if (isArray) componentHook[Symbol.iterator] = objectIterator;
+          if (Array.isArray(hookValues)) componentHook[Symbol.iterator] = objectIterator;
           return null;
         }}
       </Component>,
