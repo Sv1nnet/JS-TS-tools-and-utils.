@@ -22,7 +22,7 @@ function loadScript(url, settings) {
     // handle IE
     script.onreadystatechange = function() {
       if (script.readyState == 'loaded' || script.readyState == 'complete') {
-        script.onreadystatechange = null;
+        script.onreadystatechange = function() {};
         if (callback) callback();
       }
     };
