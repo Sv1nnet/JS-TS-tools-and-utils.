@@ -91,11 +91,16 @@ const useFileReader = ({
   const [readyState, setReadyState] = useState(reader.readyState);
 
   const createNewReader = useCallback(
-    (shouldAbortCurrentReader = true) => {
+    ({
+      shouldAbortCurrentReader = true,
+      shouldResetResult = true
+    }: { shouldAbortCurrentReader?: boolean; shouldResetResult?: boolean } = {}) => {
       if (shouldAbortCurrentReader) reader.abort();
 
       const newReader = new FileReader();
       newReader.addEventListener("progress", () => setReadyState(newReader.readyState));
+
+      if (shouldResetResult) setResult(null);
 
       setReader(newReader);
       setReadyState(newReader.readyState);
@@ -175,6 +180,11 @@ const useFileReader = ({
 
   const abort = useCallback(() => reader.abort(), [reader]);
 
+  const reset = useCallback(() => {
+    setResult(null);
+    createNewReader();
+  }, []);
+
   useEffect(() => {
     addEventListeners(reader, { onAbort, onError, onLoad, onLoadEnd, onLoadStart, onProgress });
 
@@ -194,6 +204,7 @@ const useFileReader = ({
       reader,
       result,
       readyState,
+      reset,
       createNewReader,
       readAsDataURL,
       readAsArrayBuffer,
@@ -205,6 +216,7 @@ const useFileReader = ({
       reader,
       result,
       readyState,
+      reset,
       createNewReader,
       readAsDataURL,
       readAsArrayBuffer,
